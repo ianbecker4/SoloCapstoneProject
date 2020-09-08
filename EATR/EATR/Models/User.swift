@@ -7,12 +7,20 @@
 //
 
 import Foundation
+import Firebase
 
-class User {
+struct User {
     
-    var email: String
+    let email: String
+    let uid: String
     
-    init(email: String) {
-        self.email = email
+    init(authData: Firebase.User) {
+        uid = authData.uid
+        email = authData.email!
     }
-} // End of class 
+    
+    init(email: String, uid: String) {
+        self.email = email
+        self.uid = uid
+    }
+} // End of struct

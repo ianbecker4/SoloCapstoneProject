@@ -24,6 +24,7 @@
 		4B15584C2506B14F0091E93E /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		4B15584E2506B3B10091E93E /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		4B1558502506B4C40091E93E /* UserController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserController.swift; sourceTree = "<group>"; };
+		4B65B1342506FB0700F4B6D4 /* EATR.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = EATR.entitlements; sourceTree = "<group>"; };
 		4BB85F342506A25600D106CC /* EATR.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EATR.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4BB85F372506A25600D106CC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		4BB85F392506A25600D106CC /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -57,6 +58,13 @@
 			path = Pods;
 			sourceTree = "<group>";
 		};
+		4B65B12F2506D70100F4B6D4 /* Helpers+Extensions */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = "Helpers+Extensions";
+			sourceTree = "<group>";
+		};
 		4BB85F2B2506A25600D106CC = {
 			isa = PBXGroup;
 			children = (
@@ -78,9 +86,11 @@
 		4BB85F362506A25600D106CC /* EATR */ = {
 			isa = PBXGroup;
 			children = (
+				4B65B1342506FB0700F4B6D4 /* EATR.entitlements */,
 				4BB85F4C2506A29F00D106CC /* Models */,
 				4BB85F4D2506A2A900D106CC /* Views */,
 				4BB85F4E2506A2AF00D106CC /* Controllers */,
+				4B65B12F2506D70100F4B6D4 /* Helpers+Extensions */,
 				4BB85F4B2506A26800D106CC /* Resources */,
 			);
 			path = EATR;
@@ -421,6 +431,7 @@
 			baseConfigurationReference = AAB217A3EB3177F6D0BDA95A /* Pods-EATR.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = EATR/EATR.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 4R3M5PR4UZ;
 				INFOPLIST_FILE = EATR/Resources/Info.plist;
@@ -440,6 +451,7 @@
 			baseConfigurationReference = 11AF9B7420AF1FD199DAED0D /* Pods-EATR.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = EATR/EATR.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 4R3M5PR4UZ;
 				INFOPLIST_FILE = EATR/Resources/Info.plist;
