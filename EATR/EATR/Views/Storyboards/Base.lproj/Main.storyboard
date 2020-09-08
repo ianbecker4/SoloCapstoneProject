@@ -114,8 +114,79 @@
             </objects>
             <point key="canvasLocation" x="-576" y="-186"/>
         </scene>
+        <!--Search-->
+        <scene sceneID="8Hb-22-DVd">
+            <objects>
+                <viewController id="3U8-KU-ifT" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="EOK-Tl-zyI">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <viewLayoutGuide key="safeArea" id="OPS-8i-F43"/>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="Search" selectedImage="magnifyingglass" catalog="system" id="RWx-XJ-ySL"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="QA5-dC-buG" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1164" y="-188"/>
+        </scene>
+        <!--Account-->
+        <scene sceneID="TfQ-ah-tQS">
+            <objects>
+                <viewController id="WcV-aq-vpf" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="EFq-HZ-s6Y">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <viewLayoutGuide key="safeArea" id="DI3-LX-Aks"/>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="Account" selectedImage="person.circle" catalog="system" id="q4A-Jq-Y5d"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="76l-ne-7m3" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1164" y="-857"/>
+        </scene>
+        <!--Map-->
+        <scene sceneID="aWD-LB-GID">
+            <objects>
+                <viewController id="lWi-v3-ynz" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="jpK-Dz-7pj">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <viewLayoutGuide key="safeArea" id="zOK-gN-Qzr"/>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="Map" selectedImage="mappin.and.ellipse" catalog="system" id="XSt-oV-42T"/>
+                    <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Fr3-iM-Ul5" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1164" y="497"/>
+        </scene>
+        <!--Tab Bar Controller-->
+        <scene sceneID="jHG-T2-ayt">
+            <objects>
+                <tabBarController id="67K-O6-2la" sceneMemberID="viewController">
+                    <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="1OS-OX-hqs">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="49"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </tabBar>
+                    <connections>
+                        <segue destination="WcV-aq-vpf" kind="relationship" relationship="viewControllers" id="ksb-F5-CCt"/>
+                        <segue destination="3U8-KU-ifT" kind="relationship" relationship="viewControllers" id="ei1-LK-YOx"/>
+                        <segue destination="lWi-v3-ynz" kind="relationship" relationship="viewControllers" id="mEI-Gf-GJV"/>
+                    </connections>
+                </tabBarController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="bqc-bs-iVj" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="225" y="-188"/>
+        </scene>
     </scenes>
     <resources>
         <image name="location" width="337" height="336"/>
+        <image name="magnifyingglass" catalog="system" width="128" height="115"/>
+        <image name="mappin.and.ellipse" catalog="system" width="118" height="128"/>
+        <image name="person.circle" catalog="system" width="128" height="121"/>
     </resources>
 </document>

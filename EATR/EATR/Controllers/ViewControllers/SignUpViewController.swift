@@ -27,13 +27,13 @@ class SignUpViewController: UIViewController, CLLocationManagerDelegate {
         locationManager?.delegate = self
         locationManager?.requestWhenInUseAuthorization()
         
-        Auth.auth().addStateDidChangeListener { (auth, user) in
-            if user != nil {
-                self.performSegue(withIdentifier: <#T##String#>, sender: <#T##Any?#>)
-                self.emailAddressTextField.text = nil
-                self.passwordTextField.text = nil
-            }
-        }
+//        Auth.auth().addStateDidChangeListener { (auth, user) in
+//            if user != nil {
+//                self.performSegue(withIdentifier: <#T##String#>, sender: <#T##Any?#>)
+//                self.emailAddressTextField.text = nil
+//                self.passwordTextField.text = nil
+//            }
+//        }
     }
     
     // MARK: - Actions
@@ -109,6 +109,7 @@ class SignUpViewController: UIViewController, CLLocationManagerDelegate {
     
 } // End of class
 
+    // MARK: - Extensions
 extension SignUpViewController: UITextFieldDelegate {
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
