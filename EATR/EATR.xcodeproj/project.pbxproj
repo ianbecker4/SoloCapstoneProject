@@ -3,18 +3,28 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
+		43719CFE52EC974288EBC56F /* Pods_EATR.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6EF62A2257E3F0BC2768DEA0 /* Pods_EATR.framework */; };
+		4B15584D2506B14F0091E93E /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B15584C2506B14F0091E93E /* SignUpViewController.swift */; };
+		4B15584F2506B3B10091E93E /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B15584E2506B3B10091E93E /* User.swift */; };
+		4B1558512506B4C40091E93E /* UserController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B1558502506B4C40091E93E /* UserController.swift */; };
 		4BB85F382506A25600D106CC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BB85F372506A25600D106CC /* AppDelegate.swift */; };
 		4BB85F3A2506A25600D106CC /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BB85F392506A25600D106CC /* SceneDelegate.swift */; };
 		4BB85F3F2506A25600D106CC /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4BB85F3D2506A25600D106CC /* Main.storyboard */; };
 		4BB85F412506A25800D106CC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4BB85F402506A25800D106CC /* Assets.xcassets */; };
 		4BB85F442506A25800D106CC /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4BB85F422506A25800D106CC /* LaunchScreen.storyboard */; };
+		4BB85F532506A40A00D106CC /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4BB85F522506A40A00D106CC /* GoogleService-Info.plist */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		11AF9B7420AF1FD199DAED0D /* Pods-EATR.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EATR.release.xcconfig"; path = "Target Support Files/Pods-EATR/Pods-EATR.release.xcconfig"; sourceTree = "<group>"; };
+		4B15584C2506B14F0091E93E /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
+		4B15584E2506B3B10091E93E /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		4B1558502506B4C40091E93E /* UserController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserController.swift; sourceTree = "<group>"; };
+		4B65B1342506FB0700F4B6D4 /* EATR.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = EATR.entitlements; sourceTree = "<group>"; };
 		4BB85F342506A25600D106CC /* EATR.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EATR.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4BB85F372506A25600D106CC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		4BB85F392506A25600D106CC /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -22,6 +32,9 @@
 		4BB85F402506A25800D106CC /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		4BB85F432506A25800D106CC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		4BB85F452506A25800D106CC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		4BB85F522506A40A00D106CC /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		6EF62A2257E3F0BC2768DEA0 /* Pods_EATR.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_EATR.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		AAB217A3EB3177F6D0BDA95A /* Pods-EATR.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EATR.debug.xcconfig"; path = "Target Support Files/Pods-EATR/Pods-EATR.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -29,17 +42,36 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				43719CFE52EC974288EBC56F /* Pods_EATR.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		27A923F26DD7EBB72208FEA7 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				AAB217A3EB3177F6D0BDA95A /* Pods-EATR.debug.xcconfig */,
+				11AF9B7420AF1FD199DAED0D /* Pods-EATR.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
+		4B65B12F2506D70100F4B6D4 /* Helpers+Extensions */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = "Helpers+Extensions";
+			sourceTree = "<group>";
+		};
 		4BB85F2B2506A25600D106CC = {
 			isa = PBXGroup;
 			children = (
 				4BB85F362506A25600D106CC /* EATR */,
 				4BB85F352506A25600D106CC /* Products */,
+				27A923F26DD7EBB72208FEA7 /* Pods */,
+				FE0E61713881D5A5DF90D13F /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -54,9 +86,11 @@
 		4BB85F362506A25600D106CC /* EATR */ = {
 			isa = PBXGroup;
 			children = (
+				4B65B1342506FB0700F4B6D4 /* EATR.entitlements */,
 				4BB85F4C2506A29F00D106CC /* Models */,
 				4BB85F4D2506A2A900D106CC /* Views */,
 				4BB85F4E2506A2AF00D106CC /* Controllers */,
+				4B65B12F2506D70100F4B6D4 /* Helpers+Extensions */,
 				4BB85F4B2506A26800D106CC /* Resources */,
 			);
 			path = EATR;
@@ -70,6 +104,7 @@
 				4BB85F402506A25800D106CC /* Assets.xcassets */,
 				4BB85F422506A25800D106CC /* LaunchScreen.storyboard */,
 				4BB85F452506A25800D106CC /* Info.plist */,
+				4BB85F522506A40A00D106CC /* GoogleService-Info.plist */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -77,6 +112,7 @@
 		4BB85F4C2506A29F00D106CC /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				4B15584E2506B3B10091E93E /* User.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -109,6 +145,7 @@
 		4BB85F502506A2E900D106CC /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				4B15584C2506B14F0091E93E /* SignUpViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -116,8 +153,17 @@
 		4BB85F512506A2F000D106CC /* ModelControllers */ = {
 			isa = PBXGroup;
 			children = (
+				4B1558502506B4C40091E93E /* UserController.swift */,
 			);
 			path = ModelControllers;
+			sourceTree = "<group>";
+		};
+		FE0E61713881D5A5DF90D13F /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				6EF62A2257E3F0BC2768DEA0 /* Pods_EATR.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -127,9 +173,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 4BB85F482506A25800D106CC /* Build configuration list for PBXNativeTarget "EATR" */;
 			buildPhases = (
+				DAA52FE579D44D070CCEC6F8 /* [CP] Check Pods Manifest.lock */,
 				4BB85F302506A25600D106CC /* Sources */,
 				4BB85F312506A25600D106CC /* Frameworks */,
 				4BB85F322506A25600D106CC /* Resources */,
+				0339DD7EC587CAE46273B3D8 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -179,6 +227,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				4BB85F442506A25800D106CC /* LaunchScreen.storyboard in Resources */,
+				4BB85F532506A40A00D106CC /* GoogleService-Info.plist in Resources */,
 				4BB85F412506A25800D106CC /* Assets.xcassets in Resources */,
 				4BB85F3F2506A25600D106CC /* Main.storyboard in Resources */,
 			);
@@ -186,11 +235,56 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		0339DD7EC587CAE46273B3D8 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-EATR/Pods-EATR-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-EATR/Pods-EATR-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-EATR/Pods-EATR-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		DAA52FE579D44D070CCEC6F8 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-EATR-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		4BB85F302506A25600D106CC /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4B15584F2506B3B10091E93E /* User.swift in Sources */,
+				4B15584D2506B14F0091E93E /* SignUpViewController.swift in Sources */,
+				4B1558512506B4C40091E93E /* UserController.swift in Sources */,
 				4BB85F382506A25600D106CC /* AppDelegate.swift in Sources */,
 				4BB85F3A2506A25600D106CC /* SceneDelegate.swift in Sources */,
 			);
@@ -334,8 +428,10 @@
 		};
 		4BB85F492506A25800D106CC /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = AAB217A3EB3177F6D0BDA95A /* Pods-EATR.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = EATR/EATR.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 4R3M5PR4UZ;
 				INFOPLIST_FILE = EATR/Resources/Info.plist;
@@ -352,8 +448,10 @@
 		};
 		4BB85F4A2506A25800D106CC /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 11AF9B7420AF1FD199DAED0D /* Pods-EATR.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = EATR/EATR.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 4R3M5PR4UZ;
 				INFOPLIST_FILE = EATR/Resources/Info.plist;
