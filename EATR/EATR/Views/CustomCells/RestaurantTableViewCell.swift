@@ -20,7 +20,11 @@ class RestaurantTableViewCell: UITableViewCell {
     @IBOutlet weak var restaurantDistanceLabel: UILabel!
     
     // MARK: - Properties
-    var restaurant: Business?
+    var restaurant: Business? {
+        didSet {
+            updateViews()
+        }
+    }
     var category: Category?
 
     override func awakeFromNib() {
@@ -44,9 +48,9 @@ class RestaurantTableViewCell: UITableViewCell {
     }
     
     // MARK: - Methods
-    func updateViews(with restaurant: Business, category: Category) {
-        self.restaurant = restaurant
-        self.category = category
+    func updateViews() {
+        guard let restaurant = restaurant else {return}
+        guard let category = category else {return}
         restaurantImageView.af.setImage(withURL: restaurant.imageUrl)
         restaurantNameLabel.text = restaurant.name
         restaurantCategoryLabel.text = category.title

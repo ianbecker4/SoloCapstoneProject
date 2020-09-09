@@ -16,8 +16,9 @@ class RestaurantController {
         
         let service = MoyaProvider<YelpService.RestaurauntProvider>()
         let jsonDecoder = JSONDecoder()
+        jsonDecoder.keyDecodingStrategy = .convertFromSnakeCase
         
-        service.request(.search(latitude: coordinate.latitude, longitude: coordinate.longitude, term: searchTerm)) { (result) in
+        service.request(.search(term: searchTerm, latitude: coordinate.latitude, longitude: coordinate.longitude)) { (result) in
             switch result {
             case .success(let response):
                 let topLevelJSON = try? jsonDecoder.decode(TopLevelJSON.self, from: response.data)
