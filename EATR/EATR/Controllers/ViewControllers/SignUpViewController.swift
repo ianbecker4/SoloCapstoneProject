@@ -16,18 +16,9 @@ class SignUpViewController: UIViewController, CLLocationManagerDelegate {
     @IBOutlet weak var emailAddressTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
     
-    // MARK: - Properties
-    var locationManager: CLLocationManager?
-    
     // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        locationManager = CLLocationManager()
-        locationManager?.delegate = self
-        locationManager?.desiredAccuracy = kCLLocationAccuracyBest
-        locationManager?.requestWhenInUseAuthorization()
-        locationManager?.requestLocation()
         
 //        Auth.auth().addStateDidChangeListener { (auth, user) in
 //            if user != nil {
@@ -85,23 +76,6 @@ class SignUpViewController: UIViewController, CLLocationManagerDelegate {
         alert.addAction(cancelAction)
         
         present(alert, animated: true, completion: nil)
-    }
-    
-    // MARK: - Methods
-    func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
-        if status == .authorizedWhenInUse {
-            locationManager?.requestLocation()
-        }
-    }
-    
-    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        if let location = locations.first {
-            print("location: \(location)")
-        }
-    }
-    
-    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
-        print("Error: \(error)")
     }
     
     /*

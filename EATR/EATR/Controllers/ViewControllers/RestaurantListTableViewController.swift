@@ -16,10 +16,13 @@ class RestaurantListTableViewController: UITableViewController {
     
     // MARK: - Properties
     var restaurants: [Business] = []
+    var location: Location?
 
     // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        restaurantSearchBar.delegate = self
     }
     
     // MARK: - Actions
@@ -36,7 +39,8 @@ class RestaurantListTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "restaurantCell", for: indexPath) as? RestaurantTableViewCell else {return UITableViewCell()}
 
-        let restaurantToDisplay =
+        let restaurant = self.restaurants[indexPath.row]
+        cell.restaurant = restaurant
         
         return cell
     }
@@ -50,7 +54,18 @@ class RestaurantListTableViewController: UITableViewController {
 extension RestaurantListTableViewController: UISearchBarDelegate {
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         guard let searchTerm = restaurantSearchBar.text, !searchTerm.isEmpty else {return}
+        guard let location = location else {return}
         
-        RestaurantController.fetchRestaurants(for: searchTerm, with: <#T##CLLocationCoordinate2D#>, completion: <#T##(Result<[Business], NetworkError>) -> Void#>)
+        RestaurantController.fetchRestaurants(for: searchTerm, with: location.coordinates) { (result) in
+            DispatchQueue.main.async {
+                switch result {
+                case .success(let restaurants):
+                    self.restaurants = restaurants
+                    self.tableView.reloadData()
+                case .failure(let error):
+                    print(error.localizedDescription)
+                }
+            }
+        }
     }
 }
