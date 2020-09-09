@@ -25,7 +25,9 @@ class SignUpViewController: UIViewController, CLLocationManagerDelegate {
         
         locationManager = CLLocationManager()
         locationManager?.delegate = self
+        locationManager?.desiredAccuracy = kCLLocationAccuracyBest
         locationManager?.requestWhenInUseAuthorization()
+        locationManager?.requestLocation()
         
 //        Auth.auth().addStateDidChangeListener { (auth, user) in
 //            if user != nil {
@@ -88,14 +90,19 @@ class SignUpViewController: UIViewController, CLLocationManagerDelegate {
     // MARK: - Methods
     func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
         if status == .authorizedWhenInUse {
-            if CLLocationManager.isMonitoringAvailable(for: CLBeaconRegion.self) {
-                if CLLocationManager.isRangingAvailable() {
-                    // Do work
-                }
-            }
+            locationManager?.requestLocation()
         }
     }
     
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        if let location = locations.first {
+            print("location: \(location)")
+        }
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
+        print("Error: \(error)")
+    }
     
     /*
      // MARK: - Navigation
