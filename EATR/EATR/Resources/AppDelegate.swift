@@ -8,6 +8,7 @@
 
 import UIKit
 import Firebase
+import Moya
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
