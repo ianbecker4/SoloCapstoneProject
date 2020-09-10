@@ -10,7 +10,7 @@ import Foundation
 
 struct TopLevelJSON: Codable {
     let businesses: [Business]
-}
+} // End of struct
 
 struct Business: Codable {
     let id: String
@@ -32,8 +32,8 @@ struct Business: Codable {
     var formattedDistance: String? {
         return Business.numberFormatter.string(from: distance as NSNumber)
     }
-}
+} // End of struct
 
 struct Category: Codable {
     let title: String
-}
+} // End of struct

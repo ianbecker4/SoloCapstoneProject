@@ -14,7 +14,6 @@ class RestaurantTableViewCell: UITableViewCell {
     // MARK: - Outlets
     @IBOutlet weak var restaurantImageView: UIImageView!
     @IBOutlet weak var restaurantNameLabel: UILabel!
-    @IBOutlet weak var restaurantCategoryLabel: UILabel!
     @IBOutlet weak var restaurantPriceLabel: UILabel!
     @IBOutlet weak var restaurantRatingLabel: UILabel!
     @IBOutlet weak var restaurantDistanceLabel: UILabel!
@@ -24,18 +23,6 @@ class RestaurantTableViewCell: UITableViewCell {
         didSet {
             updateViews()
         }
-    }
-    var category: Category?
-
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        // Initialization code
-    }
-
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
     }
     
     // MARK: - Actions
@@ -50,12 +37,10 @@ class RestaurantTableViewCell: UITableViewCell {
     // MARK: - Methods
     func updateViews() {
         guard let restaurant = restaurant else {return}
-        guard let category = category else {return}
-        restaurantImageView.af.setImage(withURL: restaurant.imageUrl)
-        restaurantNameLabel.text = restaurant.name
-        restaurantCategoryLabel.text = category.title
-        restaurantPriceLabel.text = restaurant.price
-        restaurantRatingLabel.text = "\(restaurant.rating)"
-        restaurantDistanceLabel.text = restaurant.formattedDistance
+        self.restaurantImageView.af.setImage(withURL: restaurant.imageUrl)
+        self.restaurantNameLabel.text = self.restaurant?.name
+        self.restaurantPriceLabel.text = self.restaurant?.price
+        self.restaurantRatingLabel.text = (String(describing: self.restaurant?.rating))
+        self.restaurantDistanceLabel.text = self.restaurant?.formattedDistance
     }
-}
+} // End of class 

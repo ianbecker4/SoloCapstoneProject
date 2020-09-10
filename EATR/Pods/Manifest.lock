@@ -354,6 +354,7 @@ DEPENDENCIES:
   - AlamofireImage (~> 4.1)
   - Firebase/Analytics
   - Firebase/Auth
+  - Firebase/Core
   - Firebase/Database
   - Firebase/Firestore
   - Firebase/Storage
@@ -410,6 +411,6 @@ SPEC CHECKSUMS:
   nanopb: 59317e09cf1f1a0af72f12af412d54edf52603fc
   PromisesObjC: b14b1c6b68e306650688599de8a45e49fae81151
 
-PODFILE CHECKSUM: f444abe8815db07e73364b81321488efd8e63281
+PODFILE CHECKSUM: 4eaf0ac0f38a4cc2e9d43bac03de6fb3c4fc4b75
 
 COCOAPODS: 1.9.3

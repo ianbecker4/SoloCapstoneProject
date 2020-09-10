@@ -9,17 +9,40 @@
 import Foundation
 import CoreLocation
 
-class Location {
-    
-    let latitude: Double
-    let longitude: Double
-    
-    var coordinates: CLLocationCoordinate2D {
-        return CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
+class LocationManager: NSObject, CLLocationManagerDelegate {
+
+    static let shared = LocationManager()
+
+    let locationManager : CLLocationManager
+
+    override init() {
+        locationManager = CLLocationManager()
+        locationManager.desiredAccuracy = kCLLocationAccuracyBest
+        super.init()
+        locationManager.delegate = self
+    }
+
+    func start() {
+        locationManager.requestWhenInUseAuthorization()
+        locationManager.startUpdatingLocation()
     }
     
-    init(_ location: CLLocationCoordinate2D) {
-        latitude = location.latitude
-        longitude = location.longitude
+    func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
+        if status == .authorizedWhenInUse {
+            locationManager.requestLocation()
+        }
     }
-}
+
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        guard let mostRecentLocation = locations.first else {
+            return
+        }
+
+        print(mostRecentLocation)
+    }
+
+    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
+        print(error)
+        locationManager.stopUpdatingLocation()
+    }
+} // End of class 
