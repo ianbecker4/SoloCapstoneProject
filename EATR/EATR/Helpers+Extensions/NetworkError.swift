@@ -27,4 +27,4 @@ enum NetworkError: LocalizedError {
             return "The server responded with bad data."
         }
     }
-}
+} // End of enum
