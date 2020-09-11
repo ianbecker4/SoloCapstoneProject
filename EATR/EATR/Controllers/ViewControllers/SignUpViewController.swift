@@ -18,32 +18,19 @@ class SignUpViewController: UIViewController, CLLocationManagerDelegate {
     @IBOutlet weak var passwordTextField: UITextField!
     
     // MARK: - Lifecycle
-//    override func viewWillAppear(_ animated: Bool) {
-//        super.viewWillAppear(animated)
-//
-//        handle = Auth.auth().addStateDidChangeListener({ (auth, user) in
-//            <#code#>
-//        })
-//    }
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         self.navigationController?.navigationBar.isHidden = true
-//        Auth.auth().addStateDidChangeListener { (auth, user) in
-//            if user != nil {
-//                self.performSegue(withIdentifier: <#T##String#>, sender: <#T##Any?#>)
-//                self.emailAddressTextField.text = nil
-//                self.passwordTextField.text = nil
-//            }
-//        }
+        
+        if Auth.auth().currentUser != nil {
+            let storyboard = UIStoryboard(name: "AccountVC", bundle: .main)
+        if let initialViewController = storyboard.instantiateInitialViewController() {
+            self.view.window?.rootViewController = initialViewController
+            self.view.window?.makeKeyAndVisible()
+            }
+        }
     }
-    
-//    override func viewWillDisappear(_ animated: Bool) {
-//        super.viewWillDisappear(animated)
-//
-//        Auth.auth().removeStateDidChangeListener(handle!)
-//    }
     
     // MARK: - Actions
     @IBAction func logInButtonTapped(_ sender: Any) {
@@ -129,7 +116,7 @@ class SignUpViewController: UIViewController, CLLocationManagerDelegate {
                     
                     let db = Firestore.firestore()
                     
-                    db.collection("users").addDocument(data: ["firstname" : firstName, "lastname" : lastName, "uid" : user!.user.uid]) { (error) in
+                    db.collection("users").addDocument(data: ["email" : email, "firstname" : firstName, "lastname" : lastName, "uid" : user!.user.uid]) { (error) in
                         if error != nil {
                             let alert = UIAlertController(title: "Sign Up Failed",
                                                           message: error?.localizedDescription,

@@ -9,6 +9,10 @@
 import UIKit
 import AlamofireImage
 
+protocol RestaurantDelegate {
+    func getRestaurantDetails()
+}
+
 class RestaurantTableViewCell: UITableViewCell {
     
     // MARK: - Outlets

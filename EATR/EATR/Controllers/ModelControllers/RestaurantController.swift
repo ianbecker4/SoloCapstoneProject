@@ -31,10 +31,6 @@ class RestaurantController {
             }
         }
     }
-    
-    func tenRandomRestaurants() {
-        
-    }
 } // End of class
 
 extension Array {
