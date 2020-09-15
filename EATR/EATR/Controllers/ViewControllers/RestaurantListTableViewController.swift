@@ -16,7 +16,7 @@ class RestaurantListTableViewController: UITableViewController {
     
     // MARK: - Properties
     var restaurants: [Business] = []
-
+    
     // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,12 +26,12 @@ class RestaurantListTableViewController: UITableViewController {
     
     // MARK: - Actions
     @IBAction func refreshButtonTapped(_ sender: Any) {
-        guard let searchTerm = restaurantSearchBar.text, !searchTerm.isEmpty else {return}
+        guard let searchTerm = restaurantSearchBar.text, !searchTerm.isEmpty else { return }
         
-        guard let lat = LocationManager.shared.locationManager.location?.coordinate.latitude else {return}
-        guard let long = LocationManager.shared.locationManager.location?.coordinate.longitude else {return}
+        guard let lat = LocationManager.shared.locationManager.location?.coordinate.latitude,
+            let long = LocationManager.shared.locationManager.location?.coordinate.longitude else { return }
         
-        RestaurantController.fetchRestaurants(for: searchTerm, latitude: lat, longitude: long) { (result) in
+        RestaurantController.shared.fetchRestaurants(for: searchTerm, latitude: lat, longitude: long) { (result) in
             DispatchQueue.main.async {
                 switch result {
                 case .success(let restaurants):
@@ -49,9 +49,9 @@ class RestaurantListTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return restaurants.count
     }
-
+    
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: "restaurantCell", for: indexPath) as? RestaurantTableViewCell else {return UITableViewCell()}
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "restaurantCell", for: indexPath) as? RestaurantTableViewCell else { return UITableViewCell() }
         
         cell.delegate = self
         let restaurant = self.restaurants[indexPath.row]
@@ -63,23 +63,17 @@ class RestaurantListTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return view.frame.height / 2
     }
-    
-    // MARK: - Navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        
-    }
-    
 } // End of class
 
-    // MARK: - Extensions
+// MARK: - Extensions
 extension RestaurantListTableViewController: UISearchBarDelegate {
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-        guard let searchTerm = restaurantSearchBar.text, !searchTerm.isEmpty else {return}
+        guard let searchTerm = restaurantSearchBar.text, !searchTerm.isEmpty else { return }
         
-        guard let lat = LocationManager.shared.locationManager.location?.coordinate.latitude else {return}
-        guard let long = LocationManager.shared.locationManager.location?.coordinate.longitude else {return}
+        guard let lat = LocationManager.shared.locationManager.location?.coordinate.latitude,
+            let long = LocationManager.shared.locationManager.location?.coordinate.longitude else { return }
         
-        RestaurantController.fetchRestaurants(for: searchTerm, latitude: lat, longitude: long) { (result) in
+        RestaurantController.shared.fetchRestaurants(for: searchTerm, latitude: lat, longitude: long) { (result) in
             DispatchQueue.main.async {
                 switch result {
                 case .success(let restaurants):
@@ -96,6 +90,6 @@ extension RestaurantListTableViewController: UISearchBarDelegate {
 
 extension RestaurantListTableViewController: RestaurantDelegate {
     func favoriteButtonTapped(restaurant: Business) {
-        RestaurantController.shared.favoriteRestaurants.append(restaurant)
+        RestaurantController.shared.saveFavorite(restaurant: restaurant)
     }
-} // Ebd of extension
+} // End of extension

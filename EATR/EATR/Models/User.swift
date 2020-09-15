@@ -25,10 +25,10 @@ struct User {
     
     init?(snapshot: DataSnapshot) {
         guard let dict = snapshot.value as? [String : Any],
-        let email = dict["email"] as? String,
-        let firstname = dict["firstname"] as? String,
-        let lastname = dict["lastname"] as? String
-            else {return nil}
+            let email = dict["email"] as? String,
+            let firstname = dict["firstname"] as? String,
+            let lastname = dict["lastname"] as? String
+            else { return nil }
         
         self.uid = snapshot.key
         self.email = email
