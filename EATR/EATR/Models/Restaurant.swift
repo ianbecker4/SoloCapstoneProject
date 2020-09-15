@@ -14,7 +14,7 @@ struct TopLevelJSON: Codable {
 } // End of struct
 
 struct Business: Codable {
-    let id: String?
+    let id: String
     let name: String
     let rating: Double
     let price: String
@@ -32,7 +32,8 @@ struct Business: Codable {
     }
     
     var formattedDistance: String? {
-        guard let distance = distance else {return nil}
+        guard let distance = distance else { return nil }
+        
         return Business.numberFormatter.string(from: distance as NSNumber)
     }
 } // End of struct

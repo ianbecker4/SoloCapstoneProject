@@ -30,7 +30,6 @@ class SignUpViewController: UIViewController, CLLocationManagerDelegate {
     
     // MARK: - Actions
     @IBAction func logInButtonTapped(_ sender: Any) {
-        
         if emailAddressTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines) == "" ||
             passwordTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines) == "" {
             let alert = UIAlertController(title: "Sign In Failed",
@@ -109,7 +108,6 @@ class SignUpViewController: UIViewController, CLLocationManagerDelegate {
                     
                     self.present(alert, animated: true, completion: nil)
                 } else {
-                    
                     let db = Firestore.firestore()
                     
                     db.collection("users").document(user!.user.uid).setData(["email" : email, "firstname" : firstName, "lastname" : lastName, "uid" : user!.user.uid]) { (error) in
@@ -127,26 +125,21 @@ class SignUpViewController: UIViewController, CLLocationManagerDelegate {
                 }
             }
         }
-        
         let cancelAction = UIAlertAction(title: "Cancel", style: .cancel)
         
         alert.addTextField { (textFirstName) in
             textFirstName.placeholder = "Enter your first name here..."
         }
-        
         alert.addTextField { (textLastName) in
             textLastName.placeholder = "Enter your last name here..."
         }
-        
         alert.addTextField { (textEmail) in
             textEmail.placeholder = "Enter your email here..."
         }
-        
         alert.addTextField { (textPassword) in
             textPassword.isSecureTextEntry = true
             textPassword.placeholder = "Enter your password here..."
         }
-        
         alert.addAction(createAction)
         alert.addAction(cancelAction)
         
@@ -155,7 +148,6 @@ class SignUpViewController: UIViewController, CLLocationManagerDelegate {
     
     // MARK: - Methods
     func transitionToAccount() {
-        
         let accountViewController = (storyboard?.instantiateViewController(identifier: "AccountVC") as? AccountViewController)!
         
         let navigationController = UINavigationController.init(rootViewController: accountViewController)
@@ -165,9 +157,8 @@ class SignUpViewController: UIViewController, CLLocationManagerDelegate {
     }
 } // End of class
 
-    // MARK: - Extensions
+// MARK: - Extensions
 extension SignUpViewController: UITextFieldDelegate {
-    
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         if textField == emailAddressTextField {
             passwordTextField.becomeFirstResponder()

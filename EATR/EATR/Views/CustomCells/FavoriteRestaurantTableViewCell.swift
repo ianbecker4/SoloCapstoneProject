@@ -10,12 +10,13 @@ import UIKit
 import MapKit
 import Firebase
 
+// MARK: - Protocol Method
 protocol FavoriteRestaurantDelegate: class {
-    func removeFromFavoritesButtonTapped(indexPath: IndexPath, restaurant: Business)
+    func removeFromFavoritesButtonTapped(restaurant: Business)
 }
 
 class FavoriteRestaurantTableViewCell: UITableViewCell {
-
+    
     // MARK: - Outlets
     @IBOutlet weak var restaurantNameLabel: UILabel!
     @IBOutlet weak var priceLabel: UILabel!
@@ -29,21 +30,18 @@ class FavoriteRestaurantTableViewCell: UITableViewCell {
         }
     }
     weak var delegate: FavoriteRestaurantDelegate?
-    var indexPath: IndexPath?
     
     // MARK: - Actions
     @IBAction func removeFromFavoritesButtonTapped(_ sender: Any) {
-        guard let restaurant = favoriteRestaurant else {return}
-        guard let indexPath = indexPath else {return}
-        self.delegate?.removeFromFavoritesButtonTapped(indexPath: indexPath, restaurant: restaurant)
-        favoriteButton.setImage(UIImage(systemName: "star"), for: .normal)
+        guard let restaurant = favoriteRestaurant else { return }
+        
+        self.delegate?.removeFromFavoritesButtonTapped(restaurant: restaurant)
     }
     
     @IBAction func getDirectionsButtonTapped(_ sender: Any) {
-        guard let favoriteRestaurant = favoriteRestaurant else {return}
+        guard let favoriteRestaurant = favoriteRestaurant else { return }
         
         let placemark = MKPlacemark(coordinate: favoriteRestaurant.coordinates)
-        
         let mapItem = MKMapItem(placemark: placemark)
         mapItem.name = favoriteRestaurant.name
         
@@ -54,7 +52,8 @@ class FavoriteRestaurantTableViewCell: UITableViewCell {
     
     // MARK: - Methods
     func updateViews() {
-        guard let favoriteRestaurant = favoriteRestaurant else {return}
+        guard let favoriteRestaurant = favoriteRestaurant else { return }
+        
         restaurantNameLabel.text = favoriteRestaurant.name
         priceLabel.text = favoriteRestaurant.price
         ratingLabel.text = "\(favoriteRestaurant.rating)"

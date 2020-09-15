@@ -10,6 +10,8 @@ import Foundation
 
 class UserController {
     
+    // MARK: - Shared Instance
+    static let shared = UserController()
     
     
 }

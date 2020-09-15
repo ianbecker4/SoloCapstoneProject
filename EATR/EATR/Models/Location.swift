@@ -10,18 +10,19 @@ import Foundation
 import CoreLocation
 
 class LocationManager: NSObject, CLLocationManagerDelegate {
-
+    
+    // MARK: - Shared Instance
     static let shared = LocationManager()
-
-    let locationManager : CLLocationManager
-
+    
+    let locationManager: CLLocationManager
+    
     override init() {
         locationManager = CLLocationManager()
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
         super.init()
         locationManager.delegate = self
     }
-
+    
     func start() {
         locationManager.requestWhenInUseAuthorization()
         locationManager.startUpdatingLocation()
@@ -32,15 +33,13 @@ class LocationManager: NSObject, CLLocationManagerDelegate {
             locationManager.requestLocation()
         }
     }
-
+    
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        guard let mostRecentLocation = locations.first else {
-            return
-        }
-
+        guard let mostRecentLocation = locations.first else { return }
+        
         print(mostRecentLocation)
     }
-
+    
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
         print(error)
         locationManager.stopUpdatingLocation()

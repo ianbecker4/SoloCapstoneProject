@@ -18,9 +18,6 @@ class AccountViewController: UIViewController, UITableViewDataSource, UITableVie
     @IBOutlet weak var emailLabel: UILabel!
     @IBOutlet weak var favoriteRestaurantTableView: UITableView!
     
-    // MARK: - Properties
-    
-
     // MARK: - Lifecycle
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -45,7 +42,6 @@ class AccountViewController: UIViewController, UITableViewDataSource, UITableVie
     
     // MARK: - Actions
     @IBAction func signOutButtonTapped(_ sender: Any) {
-        
         do {
             try Auth.auth().signOut()
             self.performSegue(withIdentifier: "ToSignInVC", sender: nil)
@@ -66,8 +62,9 @@ class AccountViewController: UIViewController, UITableViewDataSource, UITableVie
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: "favoriteRestaurantCell", for: indexPath) as? FavoriteRestaurantTableViewCell else {return UITableViewCell()}
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "favoriteRestaurantCell", for: indexPath) as? FavoriteRestaurantTableViewCell else { return UITableViewCell() }
         
+        cell.delegate = self
         let restaurant = RestaurantController.shared.favoriteRestaurants[indexPath.row]
         cell.favoriteRestaurant = restaurant
         
@@ -75,21 +72,20 @@ class AccountViewController: UIViewController, UITableViewDataSource, UITableVie
     }
     
     /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
+     // MARK: - Navigation
+     
+     // In a storyboard-based application, you will often want to do a little preparation before navigation
+     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+     // Get the new view controller using segue.destination.
+     // Pass the selected object to the new view controller.
+     }
+     */
+    
     // MARK: - Methods
     func updateUserInfo() {
         let db = Firestore.firestore()
         
         if let userID = Auth.auth().currentUser?.uid {
-            
             _ = db.collection("users").getDocuments() { (snapshot, error) in
                 if let error = error {
                     print("error getting documents: \(error)")
@@ -108,7 +104,7 @@ class AccountViewController: UIViewController, UITableViewDataSource, UITableVie
     
     func updateUserFavorites(completion: @escaping () -> Void) {
         let db = Firestore.firestore()
-        guard let user = Auth.auth().currentUser else {return completion()}
+        guard let user = Auth.auth().currentUser else { return completion() }
         
         db.collection("users").document(user.uid).collection("favorites").getDocuments() { (querySnapshot, error) in
             if let error = error {
@@ -116,7 +112,8 @@ class AccountViewController: UIViewController, UITableViewDataSource, UITableVie
                 completion()
             } else if let snapshot = querySnapshot {
                 let favorites: [Business] = snapshot.documents.compactMap { document in
-                    guard let name = document["restaurantname"] as? String,
+                    guard let id = document["documentID"] as? String,
+                        let name = document["restaurantname"] as? String,
                         let price = document["restaurantprice"] as? String,
                         let rating = document["restaurantrating"] as? Double,
                         let location = document["restaurantlocation"] as? GeoPoint,
@@ -125,18 +122,19 @@ class AccountViewController: UIViewController, UITableViewDataSource, UITableVie
                         else {return nil}
                     let coordinates = CLLocationCoordinate2D(latitude: lat, longitude: long)
                     
-                    return Business(id: nil, name: name, rating: rating, price: price, imageUrl: nil, distance: nil, coordinates: coordinates, categories: nil)
+                    return Business(id: id, name: name, rating: rating, price: price, imageUrl: nil, distance: nil, coordinates: coordinates, categories: nil)
                 }
                 RestaurantController.shared.favoriteRestaurants = favorites
                 completion()
             }
         }
     }
-}
+} // End of class
 
+// MARK: - Extensions
 extension AccountViewController: FavoriteRestaurantDelegate {
-    func removeFromFavoritesButtonTapped(indexPath: IndexPath, restaurant: Business) {
-        RestaurantController.shared.favoriteRestaurants.remove(at: indexPath.row)
+    func removeFromFavoritesButtonTapped(restaurant: Business) {
+        RestaurantController.shared.removeFromFavorites(withID: restaurant.id)
         self.favoriteRestaurantTableView.reloadData()
     }
-}
+} // End of extension
