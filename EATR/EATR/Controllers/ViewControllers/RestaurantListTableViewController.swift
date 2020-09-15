@@ -52,7 +52,8 @@ class RestaurantListTableViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "restaurantCell", for: indexPath) as? RestaurantTableViewCell else {return UITableViewCell()}
-
+        
+        cell.delegate = self
         let restaurant = self.restaurants[indexPath.row]
         cell.restaurant = restaurant
         
@@ -70,6 +71,7 @@ class RestaurantListTableViewController: UITableViewController {
     
 } // End of class
 
+    // MARK: - Extensions
 extension RestaurantListTableViewController: UISearchBarDelegate {
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         guard let searchTerm = restaurantSearchBar.text, !searchTerm.isEmpty else {return}
@@ -82,6 +84,7 @@ extension RestaurantListTableViewController: UISearchBarDelegate {
                 switch result {
                 case .success(let restaurants):
                     self.restaurants = restaurants
+                    print("\(restaurants)")
                     self.tableView.reloadData()
                 case .failure(let error):
                     print(error.localizedDescription)
@@ -90,3 +93,9 @@ extension RestaurantListTableViewController: UISearchBarDelegate {
         }
     }
 } // End of extension
+
+extension RestaurantListTableViewController: RestaurantDelegate {
+    func favoriteButtonTapped(restaurant: Business) {
+        RestaurantController.shared.favoriteRestaurants.append(restaurant)
+    }
+} // Ebd of extension

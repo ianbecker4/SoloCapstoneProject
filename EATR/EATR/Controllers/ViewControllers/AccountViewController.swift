@@ -19,27 +19,25 @@ class AccountViewController: UIViewController, UITableViewDataSource, UITableVie
     @IBOutlet weak var favoriteRestaurantTableView: UITableView!
     
     // MARK: - Properties
-    var restaurant: Business? {
-        didSet {
-            updateFavoriteRestaurants()
-        }
-    }
     
-    var favoriteRestaurants: [(name: String, price: String, rating: String)] = []
 
     // MARK: - Lifecycle
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        favoriteRestaurantTableView.reloadData()
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         if Auth.auth().currentUser == nil {
-            let storyboard = UIStoryboard(name: "SignUpVC", bundle: .main)
-        if let initialViewController = storyboard.instantiateInitialViewController() {
-            self.view.window?.rootViewController = initialViewController
-            self.view.window?.makeKeyAndVisible()
-            }
+            self.performSegue(withIdentifier: "ToSignInVC", sender: nil)
         }
         
         updateUserInfo()
+        updateUserFavorites{
+            self.favoriteRestaurantTableView.reloadData()
+        }
         
         favoriteRestaurantTableView.delegate = self
         favoriteRestaurantTableView.dataSource = self
@@ -64,14 +62,13 @@ class AccountViewController: UIViewController, UITableViewDataSource, UITableVie
     
     // MARK: UITableViewDataSource
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        favoriteRestaurants.count
+        RestaurantController.shared.favoriteRestaurants.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "favoriteRestaurantCell", for: indexPath) as? FavoriteRestaurantTableViewCell else {return UITableViewCell()}
         
-        let restaurant = favoriteRestaurants[indexPath.row]
-        
+        let restaurant = RestaurantController.shared.favoriteRestaurants[indexPath.row]
         cell.favoriteRestaurant = restaurant
         
         return cell
@@ -109,7 +106,37 @@ class AccountViewController: UIViewController, UITableViewDataSource, UITableVie
         }
     }
     
-    func updateFavoriteRestaurants() {
-        guard let restaurant = self.restaurant else {return}
+    func updateUserFavorites(completion: @escaping () -> Void) {
+        let db = Firestore.firestore()
+        guard let user = Auth.auth().currentUser else {return completion()}
+        
+        db.collection("users").document(user.uid).collection("favorites").getDocuments() { (querySnapshot, error) in
+            if let error = error {
+                print("Error getting favorites: \(error.localizedDescription)")
+                completion()
+            } else if let snapshot = querySnapshot {
+                let favorites: [Business] = snapshot.documents.compactMap { document in
+                    guard let name = document["restaurantname"] as? String,
+                        let price = document["restaurantprice"] as? String,
+                        let rating = document["restaurantrating"] as? Double,
+                        let location = document["restaurantlocation"] as? GeoPoint,
+                        let lat = CLLocationDegrees(exactly: location.latitude),
+                        let long = CLLocationDegrees(exactly: location.longitude)
+                        else {return nil}
+                    let coordinates = CLLocationCoordinate2D(latitude: lat, longitude: long)
+                    
+                    return Business(id: nil, name: name, rating: rating, price: price, imageUrl: nil, distance: nil, coordinates: coordinates, categories: nil)
+                }
+                RestaurantController.shared.favoriteRestaurants = favorites
+                completion()
+            }
+        }
+    }
+}
+
+extension AccountViewController: FavoriteRestaurantDelegate {
+    func removeFromFavoritesButtonTapped(indexPath: IndexPath, restaurant: Business) {
+        RestaurantController.shared.favoriteRestaurants.remove(at: indexPath.row)
+        self.favoriteRestaurantTableView.reloadData()
     }
 }
