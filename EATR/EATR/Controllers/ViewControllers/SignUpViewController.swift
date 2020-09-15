@@ -24,11 +24,7 @@ class SignUpViewController: UIViewController, CLLocationManagerDelegate {
         self.navigationController?.navigationBar.isHidden = true
         
         if Auth.auth().currentUser != nil {
-            let storyboard = UIStoryboard(name: "AccountVC", bundle: .main)
-        if let initialViewController = storyboard.instantiateInitialViewController() {
-            self.view.window?.rootViewController = initialViewController
-            self.view.window?.makeKeyAndVisible()
-            }
+            self.performSegue(withIdentifier: "ToSignInVC", sender: nil)
         }
     }
     
@@ -116,7 +112,7 @@ class SignUpViewController: UIViewController, CLLocationManagerDelegate {
                     
                     let db = Firestore.firestore()
                     
-                    db.collection("users").addDocument(data: ["email" : email, "firstname" : firstName, "lastname" : lastName, "uid" : user!.user.uid]) { (error) in
+                    db.collection("users").document(user!.user.uid).setData(["email" : email, "firstname" : firstName, "lastname" : lastName, "uid" : user!.user.uid]) { (error) in
                         if error != nil {
                             let alert = UIAlertController(title: "Sign Up Failed",
                                                           message: error?.localizedDescription,

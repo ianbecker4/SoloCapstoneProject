@@ -224,6 +224,7 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
+                                            <outlet property="favoriteButton" destination="7UW-h8-kkf" id="Sdd-Qz-rA9"/>
                                             <outlet property="priceLabel" destination="v4p-MI-n5N" id="uRC-pv-rwS"/>
                                             <outlet property="ratingLabel" destination="IqE-Sh-7PZ" id="Qgp-KO-r1k"/>
                                             <outlet property="restaurantNameLabel" destination="eFz-88-1S2" id="1dh-Zt-a6P"/>
@@ -282,22 +283,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9mh-TB-CXe" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2984.057971014493" y="-499.55357142857139"/>
-        </scene>
-        <!--View Controller-->
-        <scene sceneID="aWD-LB-GID">
-            <objects>
-                <viewController id="lWi-v3-ynz" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="jpK-Dz-7pj">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
-                        <viewLayoutGuide key="safeArea" id="zOK-gN-Qzr"/>
-                    </view>
-                    <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Fr3-iM-Ul5" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="3771.0144927536235" y="-186.16071428571428"/>
         </scene>
         <!--Search-->
         <scene sceneID="mk9-Oy-4gb">
@@ -407,6 +392,7 @@
                                     </constraints>
                                 </tableViewCellContentView>
                                 <connections>
+                                    <outlet property="favoriteButton" destination="av4-Tm-y5L" id="pFY-S7-Ayv"/>
                                     <outlet property="restaurantDistanceLabel" destination="Uup-V9-778" id="1Li-xe-7s3"/>
                                     <outlet property="restaurantImageView" destination="HqE-cB-lpV" id="oHu-rB-1MJ"/>
                                     <outlet property="restaurantNameLabel" destination="PJE-gX-eD2" id="AxZ-mZ-KCm"/>

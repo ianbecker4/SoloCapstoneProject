@@ -12,6 +12,10 @@ import CoreLocation
 
 class RestaurantController {
     
+    static let shared = RestaurantController()
+    
+    var favoriteRestaurants: [Business] = []
+    
     static func fetchRestaurants(for searchTerm: String, latitude: Double, longitude: Double, completion: @escaping (Result<[Business], NetworkError>) -> Void) {
         
         let service = MoyaProvider<YelpService.RestaurauntProvider>()
