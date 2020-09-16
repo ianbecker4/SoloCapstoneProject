@@ -15,6 +15,7 @@ class ReviewViewController: UIViewController, UITableViewDataSource, UITableView
     @IBOutlet weak var restaurantNameLabel: UILabel!
     @IBOutlet weak var dateLastVisitedPicker: UIDatePicker!
     @IBOutlet weak var reviewTableView: UITableView!
+    @IBOutlet weak var dateLabel: UILabel!
     
     // MARK: - Properties
     var restaurant: Business? {
@@ -33,6 +34,8 @@ class ReviewViewController: UIViewController, UITableViewDataSource, UITableView
         updateReviews(for: restaurant) {
             self.reviewTableView.reloadData()
         }
+        
+        updateDate()
 
         reviewTableView.delegate = self
         reviewTableView.dataSource = self
@@ -64,6 +67,31 @@ class ReviewViewController: UIViewController, UITableViewDataSource, UITableView
         self.present(alertController, animated: true)
     }
     
+    @IBAction func datePickerChanged(_ sender: Any) {
+        let dateFormatter = DateFormatter()
+        
+        dateFormatter.dateStyle = .medium
+        
+        let dateAsString = dateFormatter.string(from: dateLastVisitedPicker.date)
+        
+        dateLabel.text = dateAsString
+        
+        guard let restaurant = restaurant else { return }
+        
+        guard let user = Auth.auth().currentUser else { return }
+        
+        let dict: [String : Any] = ["datelastvisited" : dateAsString]
+        
+        let db = Firestore.firestore()
+        
+        db.collection("users").document(user.uid).collection("favorites").document(restaurant.id).updateData(dict) { (error) in
+            if let error = error {
+                print("Error saving date: \(error.localizedDescription)")
+            } else {
+                print("Saved date successfully.")
+            }
+        }
+    }
     
     // MARK: - UITableViewDataSource
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -109,6 +137,23 @@ class ReviewViewController: UIViewController, UITableViewDataSource, UITableView
                 }
                 ReviewController.shared.reviews = reviews
                 completion()
+            }
+        }
+    }
+    
+    func updateDate() {
+        guard let user = Auth.auth().currentUser else { return  }
+        
+        guard let restaurant = restaurant else { return }
+        
+        let db = Firestore.firestore()
+        
+        db.collection("users").document(user.uid).collection("favorites").document(restaurant.id).getDocument { (document, error) in
+            if let error = error {
+                print("Error getting date: \(error.localizedDescription)")
+            } else if let document = document, document.exists {
+                guard let date = document.get("datelastvisited") as? String else { return }
+                self.dateLabel.text = date
             }
         }
     }
