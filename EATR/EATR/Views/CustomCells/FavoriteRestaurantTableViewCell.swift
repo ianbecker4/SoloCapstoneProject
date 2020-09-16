@@ -55,7 +55,7 @@ class FavoriteRestaurantTableViewCell: UITableViewCell {
         guard let favoriteRestaurant = favoriteRestaurant else { return }
         
         restaurantNameLabel.text = favoriteRestaurant.name
-        priceLabel.text = favoriteRestaurant.price
-        ratingLabel.text = "\(favoriteRestaurant.rating)"
+        priceLabel.text = "Price level: \(self.favoriteRestaurant?.price ?? "")"
+        ratingLabel.text = "Rating: \(self.favoriteRestaurant?.rating ?? 0.0)"
     }
 } // End of class
