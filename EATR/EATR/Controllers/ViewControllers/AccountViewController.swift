@@ -71,15 +71,15 @@ class AccountViewController: UIViewController, UITableViewDataSource, UITableVie
         return cell
     }
     
-    /*
-     // MARK: - Navigation
-     
-     // In a storyboard-based application, you will often want to do a little preparation before navigation
-     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-     // Get the new view controller using segue.destination.
-     // Pass the selected object to the new view controller.
-     }
-     */
+    // MARK: - Navigation
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "toReviewVC" {
+            guard let indexPath = favoriteRestaurantTableView.indexPathForSelectedRow else { return }
+            let destinationVC = segue.destination as? ReviewViewController
+            let restaurantToSend = RestaurantController.shared.favoriteRestaurants[indexPath.row]
+            destinationVC?.restaurant = restaurantToSend
+        }
+    }
     
     // MARK: - Methods
     func updateUserInfo() {

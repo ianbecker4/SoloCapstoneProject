@@ -34,7 +34,7 @@ struct Business: Codable {
     var formattedDistance: String? {
         guard let distance = distance else { return nil }
         
-        return Business.numberFormatter.string(from: distance as NSNumber)
+        return Business.numberFormatter.string(from: (distance / 1609) as NSNumber)
     }
 } // End of struct
 

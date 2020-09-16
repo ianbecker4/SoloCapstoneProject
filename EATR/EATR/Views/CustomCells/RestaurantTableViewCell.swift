@@ -56,14 +56,13 @@ class RestaurantTableViewCell: UITableViewCell {
     
     // MARK: - Methods
     func updateViews() {
-        guard let restaurant = restaurant,
-            let url = restaurant.imageUrl
+        guard let restaurant = restaurant, let url = restaurant.imageUrl, let distance = restaurant.formattedDistance
             else { return }
         
         self.restaurantImageView.af.setImage(withURL: url)
         self.restaurantNameLabel.text = self.restaurant?.name
-        self.restaurantPriceLabel.text = self.restaurant?.price
-        self.restaurantRatingLabel.text = (String(describing: self.restaurant?.rating))
-        self.restaurantDistanceLabel.text = self.restaurant?.formattedDistance
+        self.restaurantPriceLabel.text = "Price level: \(self.restaurant?.price ?? "")"
+        self.restaurantRatingLabel.text = "Rating: \(self.restaurant?.rating ?? 0.0)"
+        self.restaurantDistanceLabel.text = "Distance: \(distance) miles"
     }
 } // End of class 
