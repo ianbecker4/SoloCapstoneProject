@@ -60,6 +60,9 @@ class RestaurantTableViewCell: UITableViewCell {
             else { return }
         
         self.restaurantImageView.af.setImage(withURL: url)
+        self.restaurantImageView.layer.cornerRadius = restaurantImageView.frame.height / 2
+        self.restaurantImageView.layer.borderColor = UIColor.black.cgColor
+        self.restaurantImageView.layer.borderWidth = 3
         self.restaurantNameLabel.text = self.restaurant?.name
         self.restaurantPriceLabel.text = "Price level: \(self.restaurant?.price ?? "")"
         self.restaurantRatingLabel.text = "Rating: \(self.restaurant?.rating ?? 0.0)"
