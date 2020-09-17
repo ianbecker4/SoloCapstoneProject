@@ -21,24 +21,17 @@ class SignUpViewController: UIViewController, CLLocationManagerDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.navigationController?.navigationBar.isHidden = true
+        emailAddressTextField.delegate = self
+        passwordTextField.delegate = self
         
-        if Auth.auth().currentUser != nil {
-            self.performSegue(withIdentifier: "ToSignInVC", sender: nil)
-        }
+        self.navigationController?.navigationBar.isHidden = true
     }
     
     // MARK: - Actions
     @IBAction func logInButtonTapped(_ sender: Any) {
         if emailAddressTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines) == "" ||
             passwordTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines) == "" {
-            let alert = UIAlertController(title: "Sign In Failed",
-                                          message: "Please fill in all fields",
-                                          preferredStyle: .alert)
-            
-            alert.addAction(UIAlertAction(title: "OK", style: .default))
-            
-            self.present(alert, animated: true, completion: nil)
+            presentAlertController(title: "Sign In Failed", message: "Please fill in all fields")
         }
         
         let email = emailAddressTextField.text!.trimmingCharacters(in: .whitespacesAndNewlines)
@@ -46,13 +39,7 @@ class SignUpViewController: UIViewController, CLLocationManagerDelegate {
         
         Auth.auth().signIn(withEmail: email, password: password) { user, error in
             if let error = error, user == nil {
-                let alert = UIAlertController(title: "Sign In Failed",
-                                              message: error.localizedDescription,
-                                              preferredStyle: .alert)
-                
-                alert.addAction(UIAlertAction(title: "OK", style: .default))
-                
-                self.present(alert, animated: true, completion: nil)
+                self.presentAlertController(title: "Sign In Failed", message: error.localizedDescription)
             } else {
                 self.transitionToAccount()
             }
@@ -73,24 +60,12 @@ class SignUpViewController: UIViewController, CLLocationManagerDelegate {
                 lastNameTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines) == "" ||
                 createEmailTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines) == "" ||
                 createPasswordTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines) == "" {
-                let alert = UIAlertController(title: "Sign Up Failed",
-                                              message: "Please fill in all fields",
-                                              preferredStyle: .alert)
-                
-                alert.addAction(UIAlertAction(title: "OK", style: .default))
-                
-                self.present(alert, animated: true, completion: nil)
+                self.presentAlertController(title: "Sign Up Failed", message: "Please fill in all fields")
             }
             
             let cleanedPassword = createPasswordTextField.text!.trimmingCharacters(in: .whitespacesAndNewlines)
             if Validation.isPasswordValid(cleanedPassword) == false {
-                let alert = UIAlertController(title: "Sign Up Failed",
-                                              message: "Please make sure your password is at least 8 characters, contains a special character, and a number.",
-                                              preferredStyle: .alert)
-                
-                alert.addAction(UIAlertAction(title: "OK", style: .default))
-                
-                self.present(alert, animated: true, completion: nil)
+                self.presentAlertController(title: "Sign Up Failed", message: "Please make sure your password is at least 8 characters, contains a special character, and a number.")
             }
             
             let firstName = firstNameTextField.text!.trimmingCharacters(in: .whitespacesAndNewlines)
@@ -99,14 +74,8 @@ class SignUpViewController: UIViewController, CLLocationManagerDelegate {
             let password = createPasswordTextField.text!.trimmingCharacters(in: .whitespacesAndNewlines)
             
             Auth.auth().createUser(withEmail: email, password: password) { (user, error) in
-                if error != nil {
-                    let alert = UIAlertController(title: "Sign Up Failed",
-                                                  message: error?.localizedDescription,
-                                                  preferredStyle: .alert)
-                    
-                    alert.addAction(UIAlertAction(title: "OK", style: .default))
-                    
-                    self.present(alert, animated: true, completion: nil)
+                if let error = error {
+                    self.presentAlertController(title: "Sign Up Failed", message: error.localizedDescription)
                 } else {
                     let db = Firestore.firestore()
                     
@@ -155,15 +124,25 @@ class SignUpViewController: UIViewController, CLLocationManagerDelegate {
         view.window?.rootViewController = navigationController
         view.window?.makeKeyAndVisible()
     }
+    
+    func presentAlertController(title: String, message: String) {
+        let alert = UIAlertController(title: title,
+                                      message: message,
+                                      preferredStyle: .alert)
+        
+        alert.addAction(UIAlertAction(title: "OK", style: .default))
+        
+        self.present(alert, animated: true, completion: nil)
+    }
 } // End of class
 
 // MARK: - Extensions
 extension SignUpViewController: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         if textField == emailAddressTextField {
+            textField.resignFirstResponder()
             passwordTextField.becomeFirstResponder()
-        }
-        if textField == passwordTextField {
+        } else if textField == passwordTextField {
             textField.resignFirstResponder()
         }
         return true

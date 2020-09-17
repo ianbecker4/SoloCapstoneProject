@@ -55,7 +55,7 @@ class ReviewViewController: UIViewController, UITableViewDataSource, UITableView
         let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
         
         let saveAction = UIAlertAction(title: "Save", style: .default) { (_) in
-            guard let itemName = alertController.textFields?[0].text, let reviewText = alertController.textFields?[0].text, let restaurant = self.restaurant, !itemName.isEmpty, !reviewText.isEmpty else { return }
+            guard let itemName = alertController.textFields?[0].text, let reviewText = alertController.textFields?[1].text, let restaurant = self.restaurant, !itemName.isEmpty, !reviewText.isEmpty else { return }
             
             ReviewController.shared.createReview(for: itemName, reviewText: reviewText, restaurant: restaurant)
             self.reviewTableView.reloadData()
@@ -107,6 +107,9 @@ class ReviewViewController: UIViewController, UITableViewDataSource, UITableView
         return cell
     }
     
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        return "Item Reviews"
+    }
 
     /*
     // MARK: - Navigation

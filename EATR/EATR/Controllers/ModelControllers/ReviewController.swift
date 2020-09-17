@@ -38,4 +38,4 @@ class ReviewController {
             }
         }
     }
-}
+} // End of class

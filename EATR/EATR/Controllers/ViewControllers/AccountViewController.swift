@@ -71,6 +71,10 @@ class AccountViewController: UIViewController, UITableViewDataSource, UITableVie
         return cell
     }
     
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        return "Favorites"
+    }
+    
     // MARK: - Navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "toReviewVC" {

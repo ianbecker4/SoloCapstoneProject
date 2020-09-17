@@ -63,11 +63,16 @@ class RestaurantListTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return view.frame.height / 2
     }
+    
+    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        return "Randomized Results"
+    }
 } // End of class
 
 // MARK: - Extensions
 extension RestaurantListTableViewController: UISearchBarDelegate {
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        searchBar.resignFirstResponder()
         guard let searchTerm = restaurantSearchBar.text, !searchTerm.isEmpty else { return }
         
         guard let lat = LocationManager.shared.locationManager.location?.coordinate.latitude,
