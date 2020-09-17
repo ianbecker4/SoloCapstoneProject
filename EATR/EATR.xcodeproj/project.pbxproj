@@ -11,6 +11,7 @@
 		4B15584D2506B14F0091E93E /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B15584C2506B14F0091E93E /* SignUpViewController.swift */; };
 		4B15584F2506B3B10091E93E /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B15584E2506B3B10091E93E /* User.swift */; };
 		4B1558512506B4C40091E93E /* UserController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B1558502506B4C40091E93E /* UserController.swift */; };
+		4B1F8A8C2513E8F4001C94EB /* UserError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B1F8A8B2513E8F4001C94EB /* UserError.swift */; };
 		4B473A9F25127521004C30FC /* Review.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B473A9E25127521004C30FC /* Review.swift */; };
 		4B473AA12512757B004C30FC /* ReviewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B473AA02512757B004C30FC /* ReviewController.swift */; };
 		4B49C2AC25085B0600D4BCA5 /* YelpService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B49C2AB25085B0600D4BCA5 /* YelpService.swift */; };
@@ -38,6 +39,7 @@
 		4B15584C2506B14F0091E93E /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		4B15584E2506B3B10091E93E /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		4B1558502506B4C40091E93E /* UserController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserController.swift; sourceTree = "<group>"; };
+		4B1F8A8B2513E8F4001C94EB /* UserError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserError.swift; sourceTree = "<group>"; };
 		4B473A9E25127521004C30FC /* Review.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Review.swift; sourceTree = "<group>"; };
 		4B473AA02512757B004C30FC /* ReviewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewController.swift; sourceTree = "<group>"; };
 		4B49C2AB25085B0600D4BCA5 /* YelpService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YelpService.swift; sourceTree = "<group>"; };
@@ -92,6 +94,7 @@
 				4B49C2AB25085B0600D4BCA5 /* YelpService.swift */,
 				4B9397152509588E0081256C /* NetworkError.swift */,
 				4B91BAC5250AB26C00B83FDB /* Validation.swift */,
+				4B1F8A8B2513E8F4001C94EB /* UserError.swift */,
 			);
 			path = "Helpers+Extensions";
 			sourceTree = "<group>";
@@ -335,6 +338,7 @@
 				4B15584F2506B3B10091E93E /* User.swift in Sources */,
 				4B15584D2506B14F0091E93E /* SignUpViewController.swift in Sources */,
 				4B473AA12512757B004C30FC /* ReviewController.swift in Sources */,
+				4B1F8A8C2513E8F4001C94EB /* UserError.swift in Sources */,
 				4BA1AC37250ACE1D00AB1FE8 /* AccountViewController.swift in Sources */,
 				4BA3E54C250C2B23009363DC /* FavoriteRestaurantTableViewCell.swift in Sources */,
 				4B1558512506B4C40091E93E /* UserController.swift in Sources */,

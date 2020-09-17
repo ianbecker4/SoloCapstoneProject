@@ -31,7 +31,7 @@ class ReviewViewController: UIViewController, UITableViewDataSource, UITableView
         super.viewDidLoad()
         
         guard let restaurant = restaurant else { return }
-        updateReviews(for: restaurant) {
+        ReviewController.shared.updateReviews(for: restaurant) {
             self.reviewTableView.reloadData()
         }
         
@@ -111,39 +111,7 @@ class ReviewViewController: UIViewController, UITableViewDataSource, UITableView
         return "Item Reviews"
     }
 
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
-    
     // MARK: - Methods
-    func updateReviews(for restaurant: Business, completion: @escaping () -> Void) {
-        guard let user = Auth.auth().currentUser else { return completion() }
-        
-        let db = Firestore.firestore()
-        
-        db.collection("users").document(user.uid).collection("favorites").document(restaurant.id).collection("reviews").getDocuments { (querySnapshot, error) in
-            if let error = error {
-                print("Error getting reviews: \(error.localizedDescription)")
-                completion()
-            } else if let snapshot = querySnapshot {
-                let reviews: [Review] = snapshot.documents.compactMap { document in
-                    guard let itemName = document["itemname"] as? String,
-                        let reviewText = document["itemreview"] as? String else { return nil }
-                    
-                    return Review(itemName: itemName, review: reviewText)
-                }
-                ReviewController.shared.reviews = reviews
-                completion()
-            }
-        }
-    }
-    
     func updateDate() {
         guard let user = Auth.auth().currentUser else { return  }
         

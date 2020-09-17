@@ -32,7 +32,7 @@ class AccountViewController: UIViewController, UITableViewDataSource, UITableVie
         }
         
         updateUserInfo()
-        updateUserFavorites{
+        UserController.shared.updateUserFavorites{
             self.favoriteRestaurantTableView.reloadData()
         }
         
@@ -92,44 +92,17 @@ class AccountViewController: UIViewController, UITableViewDataSource, UITableVie
         if let userID = Auth.auth().currentUser?.uid {
             _ = db.collection("users").getDocuments() { (snapshot, error) in
                 if let error = error {
-                    print("error getting documents: \(error)")
+                    print("error getting user: \(error)")
                 } else {
                     if let currentUserDoc = snapshot?.documents.first(where: {($0["uid"] as? String) == userID}) {
-                        let firstname = currentUserDoc["firstname"] as! String
-                        let lastname = currentUserDoc["lastname"] as! String
-                        let email = currentUserDoc["email"] as! String
+                        guard let firstname = currentUserDoc["firstname"] as? String,
+                        let lastname = currentUserDoc["lastname"] as? String,
+                        let email = currentUserDoc["email"] as? String
+                            else { return }
                         self.nameLabel.text = "\(firstname) \(lastname)"
                         self.emailLabel.text = email
                     }
                 }
-            }
-        }
-    }
-    
-    func updateUserFavorites(completion: @escaping () -> Void) {
-        let db = Firestore.firestore()
-        guard let user = Auth.auth().currentUser else { return completion() }
-        
-        db.collection("users").document(user.uid).collection("favorites").getDocuments() { (querySnapshot, error) in
-            if let error = error {
-                print("Error getting favorites: \(error.localizedDescription)")
-                completion()
-            } else if let snapshot = querySnapshot {
-                let favorites: [Business] = snapshot.documents.compactMap { document in
-                    guard let id = document["documentID"] as? String,
-                        let name = document["restaurantname"] as? String,
-                        let price = document["restaurantprice"] as? String,
-                        let rating = document["restaurantrating"] as? Double,
-                        let location = document["restaurantlocation"] as? GeoPoint,
-                        let lat = CLLocationDegrees(exactly: location.latitude),
-                        let long = CLLocationDegrees(exactly: location.longitude)
-                        else {return nil}
-                    let coordinates = CLLocationCoordinate2D(latitude: lat, longitude: long)
-                    
-                    return Business(id: id, name: name, rating: rating, price: price, imageUrl: nil, distance: nil, coordinates: coordinates, categories: nil)
-                }
-                RestaurantController.shared.favoriteRestaurants = favorites
-                completion()
             }
         }
     }

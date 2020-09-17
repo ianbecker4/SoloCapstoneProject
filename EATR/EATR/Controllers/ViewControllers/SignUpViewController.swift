@@ -7,11 +7,8 @@
 //
 
 import UIKit
-import FirebaseAuth
-import Firebase
-import CoreLocation
 
-class SignUpViewController: UIViewController, CLLocationManagerDelegate {
+class SignUpViewController: UIViewController {
     
     // MARK: - Outlets
     @IBOutlet weak var emailAddressTextField: UITextField!
@@ -31,22 +28,49 @@ class SignUpViewController: UIViewController, CLLocationManagerDelegate {
     @IBAction func logInButtonTapped(_ sender: Any) {
         if emailAddressTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines) == "" ||
             passwordTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines) == "" {
-            presentAlertController(title: "Sign In Failed", message: "Please fill in all fields")
+            presentFailureAlertController(title: "Sign In Failed", message: "Please fill in all fields")
         }
         
         let email = emailAddressTextField.text!.trimmingCharacters(in: .whitespacesAndNewlines)
         let password = passwordTextField.text!.trimmingCharacters(in: .whitespacesAndNewlines)
         
-        Auth.auth().signIn(withEmail: email, password: password) { user, error in
-            if let error = error, user == nil {
-                self.presentAlertController(title: "Sign In Failed", message: error.localizedDescription)
-            } else {
+        UserController.shared.signInUserWith(email: email, password: password) { (result) in
+            switch result {
+            case .success(let user):
+                guard let user = user else { return }
+                UserController.shared.currentUser = user
                 self.transitionToAccount()
+            case .failure(let error):
+                self.presentFailureAlertController(title: "Sign In Failed", message: "\(error.errorDescription)")
             }
         }
     }
     
     @IBAction func signUpButtonTapped(_ sender: Any) {
+        presentCreateAlertController()
+    }
+    
+    // MARK: - Methods
+    func transitionToAccount() {
+        let accountViewController = (storyboard?.instantiateViewController(identifier: "AccountVC") as? AccountViewController)!
+        
+        let navigationController = UINavigationController.init(rootViewController: accountViewController)
+        
+        view.window?.rootViewController = navigationController
+        view.window?.makeKeyAndVisible()
+    }
+    
+    func presentFailureAlertController(title: String, message: String) {
+        let alert = UIAlertController(title: title,
+                                      message: message,
+                                      preferredStyle: .alert)
+        
+        alert.addAction(UIAlertAction(title: "OK", style: .default))
+        
+        self.present(alert, animated: true, completion: nil)
+    }
+    
+    func presentCreateAlertController() {
         let alert = UIAlertController(title: "Sign Up!", message: "Create your EATR account!", preferredStyle: .alert)
         
         let createAction = UIAlertAction(title: "Create Account!", style: .default) { (_) in
@@ -60,12 +84,15 @@ class SignUpViewController: UIViewController, CLLocationManagerDelegate {
                 lastNameTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines) == "" ||
                 createEmailTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines) == "" ||
                 createPasswordTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines) == "" {
-                self.presentAlertController(title: "Sign Up Failed", message: "Please fill in all fields")
+                self.presentFailureAlertController(title: "Sign Up Failed", message: "Please fill in all fields")
             }
             
+            let cleanedEmail = createEmailTextField.text!.trimmingCharacters(in: .whitespacesAndNewlines)
             let cleanedPassword = createPasswordTextField.text!.trimmingCharacters(in: .whitespacesAndNewlines)
-            if Validation.isPasswordValid(cleanedPassword) == false {
-                self.presentAlertController(title: "Sign Up Failed", message: "Please make sure your password is at least 8 characters, contains a special character, and a number.")
+            if Validation.isValidEmail(cleanedEmail) == false {
+                self.presentFailureAlertController(title: "Sign Up Failed", message: "Please make sure your email is in the correct format.")
+            } else if Validation.isPasswordValid(cleanedPassword) == false {
+                self.presentFailureAlertController(title: "Sign Up Failed", message: "Please make sure your password is at least 8 characters, contains a special character, and a number.")
             }
             
             let firstName = firstNameTextField.text!.trimmingCharacters(in: .whitespacesAndNewlines)
@@ -73,24 +100,14 @@ class SignUpViewController: UIViewController, CLLocationManagerDelegate {
             let email = createEmailTextField.text!.trimmingCharacters(in: .whitespacesAndNewlines)
             let password = createPasswordTextField.text!.trimmingCharacters(in: .whitespacesAndNewlines)
             
-            Auth.auth().createUser(withEmail: email, password: password) { (user, error) in
-                if let error = error {
-                    self.presentAlertController(title: "Sign Up Failed", message: error.localizedDescription)
-                } else {
-                    let db = Firestore.firestore()
-                    
-                    db.collection("users").document(user!.user.uid).setData(["email" : email, "firstname" : firstName, "lastname" : lastName, "uid" : user!.user.uid]) { (error) in
-                        if error != nil {
-                            let alert = UIAlertController(title: "Sign Up Failed",
-                                                          message: error?.localizedDescription,
-                                                          preferredStyle: .alert)
-                            
-                            alert.addAction(UIAlertAction(title: "OK", style: .default))
-                            
-                            self.present(alert, animated: true, completion: nil)
-                        }
-                    }
+            UserController.shared.createUserWith(firstName: firstName, lastName: lastName, email: email, password: password) { (result) in
+                switch result {
+                case .success(let user):
+                    guard let user = user else { return }
+                    UserController.shared.currentUser = user
                     self.transitionToAccount()
+                case .failure(let error):
+                    self.presentFailureAlertController(title: "Sign Up Failed", message: "Error creating user: \(error.localizedDescription)")
                 }
             }
         }
@@ -113,26 +130,6 @@ class SignUpViewController: UIViewController, CLLocationManagerDelegate {
         alert.addAction(cancelAction)
         
         present(alert, animated: true, completion: nil)
-    }
-    
-    // MARK: - Methods
-    func transitionToAccount() {
-        let accountViewController = (storyboard?.instantiateViewController(identifier: "AccountVC") as? AccountViewController)!
-        
-        let navigationController = UINavigationController.init(rootViewController: accountViewController)
-        
-        view.window?.rootViewController = navigationController
-        view.window?.makeKeyAndVisible()
-    }
-    
-    func presentAlertController(title: String, message: String) {
-        let alert = UIAlertController(title: title,
-                                      message: message,
-                                      preferredStyle: .alert)
-        
-        alert.addAction(UIAlertAction(title: "OK", style: .default))
-        
-        self.present(alert, animated: true, completion: nil)
     }
 } // End of class
 
