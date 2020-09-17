@@ -11,10 +11,13 @@ import Firebase
 
 class ReviewController {
     
+    // MARK: - Shared Instance
     static let shared = ReviewController()
     
+    // MARK: - SoT
     var reviews: [Review] = []
     
+    // MARK: - CRUD
     func createReview(for item: String, reviewText: String, restaurant: Business) {
         let review = Review(itemName: item, review: reviewText)
         
@@ -35,6 +38,28 @@ class ReviewController {
                 print("Error saving review: \(error.localizedDescription)")
             } else {
                 print("Review successfuly saved.")
+            }
+        }
+    }
+    
+    func updateReviews(for restaurant: Business, completion: @escaping () -> Void) {
+        guard let user = Auth.auth().currentUser else { return completion() }
+        
+        let db = Firestore.firestore()
+        
+        db.collection("users").document(user.uid).collection("favorites").document(restaurant.id).collection("reviews").getDocuments { (querySnapshot, error) in
+            if let error = error {
+                print("Error getting reviews: \(error.localizedDescription)")
+                completion()
+            } else if let snapshot = querySnapshot {
+                let reviews: [Review] = snapshot.documents.compactMap { document in
+                    guard let itemName = document["itemname"] as? String,
+                        let reviewText = document["itemreview"] as? String else { return nil }
+                    
+                    return Review(itemName: itemName, review: reviewText)
+                }
+                ReviewController.shared.reviews = reviews
+                completion()
             }
         }
     }

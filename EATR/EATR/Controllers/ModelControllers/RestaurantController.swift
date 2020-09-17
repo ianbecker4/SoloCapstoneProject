@@ -8,15 +8,17 @@
 
 import Foundation
 import Moya
-import CoreLocation
 import Firebase
 
 class RestaurantController {
     
+    // MARK: - Shared Instance
     static let shared = RestaurantController()
     
+    // MARK: - SoT
     var favoriteRestaurants: [Business] = []
     
+    // MARK: - CRUD
     func fetchRestaurants(for searchTerm: String, latitude: Double, longitude: Double, completion: @escaping (Result<[Business], NetworkError>) -> Void) {
         
         let service = MoyaProvider<YelpService.RestaurauntProvider>()

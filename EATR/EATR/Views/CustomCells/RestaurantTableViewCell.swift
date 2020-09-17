@@ -9,7 +9,6 @@
 import UIKit
 import AlamofireImage
 import MapKit
-import Firebase
 
 // MARK: - Protocol Method
 protocol RestaurantDelegate: class {

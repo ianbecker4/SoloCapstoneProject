@@ -8,7 +8,6 @@
 
 import UIKit
 import MapKit
-import Firebase
 
 // MARK: - Protocol Method
 protocol FavoriteRestaurantDelegate: class {
