@@ -100,6 +100,7 @@ class SignUpViewController: UIViewController {
             guard let firstName = firstNameTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines),
                 let lastName = lastNameTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines), !firstName.isEmpty, !lastName.isEmpty else { return }
             
+            if Validation.isValidEmail(cleanedEmail) == true && Validation.isPasswordValid(cleanedPassword) == true {
             UserController.shared.createUserWith(firstName: firstName, lastName: lastName, email: cleanedEmail, password: cleanedPassword) { (result) in
                 switch result {
                 case .success(let user):
@@ -108,6 +109,7 @@ class SignUpViewController: UIViewController {
                     self.transitionToAccount()
                 case .failure(let error):
                     self.presentFailureAlertController(title: "Sign Up Failed", message: "Error creating user: \(error.localizedDescription)")
+                    }
                 }
             }
         }
