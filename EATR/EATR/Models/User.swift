@@ -11,12 +11,12 @@ import Firebase
 
 struct User {
     
-    let firstname: String?
-    let lastname: String?
+    let firstname: String
+    let lastname: String
     let email: String
-    let uid: String?
+    let uid: String
     
-    init(firstname: String?, lastname: String?, email: String, uid: String?) {
+    init(firstname: String, lastname: String, email: String, uid: String) {
         self.firstname = firstname
         self.lastname = lastname
         self.email = email

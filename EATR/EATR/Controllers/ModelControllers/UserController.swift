@@ -48,7 +48,8 @@ class UserController {
             if let error = error, user == nil {
                 completion(.failure(.firebaseError(error)))
             } else {
-                let loggedInUser = User(firstname: nil, lastname: nil, email: email, uid: user?.user.uid)
+                guard let user = user else { return completion(.failure(.couldNotUnwrap))}
+                let loggedInUser = User(firstname: self.currentUser?.firstname ?? "", lastname: self.currentUser?.lastname ?? "", email: email, uid: user.user.uid)
                 print("User signed in successfully")
                 completion(.success(loggedInUser))
             }
