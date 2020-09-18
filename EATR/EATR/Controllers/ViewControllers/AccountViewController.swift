@@ -90,7 +90,7 @@ class AccountViewController: UIViewController, UITableViewDataSource, UITableVie
         let db = Firestore.firestore()
         
         if let userID = Auth.auth().currentUser?.uid {
-            _ = db.collection("users").getDocuments() { (snapshot, error) in
+            db.collection("users").getDocuments() { (snapshot, error) in
                 if let error = error {
                     print("error getting user: \(error)")
                 } else {
