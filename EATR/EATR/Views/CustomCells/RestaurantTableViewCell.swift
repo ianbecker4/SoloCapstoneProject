@@ -32,6 +32,7 @@ class RestaurantTableViewCell: UITableViewCell {
         }
     }
     weak var delegate: RestaurantDelegate?
+    var isFavorite: Bool = false
     
     // MARK: - Actions
     @IBAction func addToFavoritesButtonTapped(_ sender: Any) {
@@ -66,5 +67,15 @@ class RestaurantTableViewCell: UITableViewCell {
         self.restaurantPriceLabel.text = "Price level: \(self.restaurant?.price ?? "")"
         self.restaurantRatingLabel.text = "Rating: \(self.restaurant?.rating ?? 0.0)"
         self.restaurantDistanceLabel.text = "Distance: \(distance) miles"
+        
+        updateFavoriteButtonFor(restaurant: restaurant)
+    }
+    
+    func updateFavoriteButtonFor(restaurant: Business) {
+        if RestaurantController.shared.favoriteRestaurants.firstIndex(of: restaurant) != nil {
+            self.favoriteButton.setImage(UIImage(systemName: "star.fill"), for: .normal)
+        } else {
+            self.favoriteButton.setImage(UIImage(systemName: "star"), for: .normal)
+        }
     }
 } // End of class 

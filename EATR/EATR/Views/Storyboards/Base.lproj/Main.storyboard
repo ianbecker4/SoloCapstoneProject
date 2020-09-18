@@ -16,23 +16,20 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="W44-Cc-lDo">
-                                <rect key="frame" x="20.5" y="301" width="373" height="538"/>
+                                <rect key="frame" x="20.5" y="296" width="373" height="358"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tap &quot;Sign Up!&quot; above to create an account with your email and password!" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="M26-Tc-U2P">
-                                        <rect key="frame" x="32" y="8" width="309" height="174"/>
+                                        <rect key="frame" x="32" y="8" width="309" height="171"/>
                                         <fontDescription key="fontDescription" name="Copperplate-Bold" family="Copperplate" pointSize="24"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="200" text="If you already have an account, enter your email and password, then tap &quot;Log In!&quot; to access your account." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VUN-pX-Occ">
-                                        <rect key="frame" x="32" y="182" width="309" height="174"/>
+                                        <rect key="frame" x="32" y="179" width="309" height="171"/>
                                         <fontDescription key="fontDescription" name="Copperplate-Bold" family="Copperplate" pointSize="20"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="location" translatesAutoresizingMaskIntoConstraints="NO" id="6aj-Tf-Vvi">
-                                        <rect key="frame" x="32" y="356" width="309" height="174"/>
-                                    </imageView>
                                 </subviews>
                                 <edgeInsets key="layoutMargins" top="8" left="32" bottom="8" right="32"/>
                             </stackView>
@@ -68,7 +65,7 @@
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="v94-oU-Mw1">
                                         <rect key="frame" x="32" y="188" width="309" height="31"/>
-                                        <color key="backgroundColor" systemColor="systemRedColor" red="1" green="0.23137254900000001" blue="0.18823529410000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <color key="backgroundColor" systemColor="systemGreenColor" red="0.20392156859999999" green="0.78039215689999997" blue="0.34901960780000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <fontDescription key="fontDescription" name="Copperplate-Bold" family="Copperplate" pointSize="17"/>
                                         <state key="normal" title="Sign Up!">
                                             <color key="titleColor" systemColor="systemIndigoColor" red="0.34509803919999998" green="0.33725490200000002" blue="0.83921568629999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -86,15 +83,22 @@
                                 </subviews>
                                 <edgeInsets key="layoutMargins" top="8" left="32" bottom="8" right="32"/>
                             </stackView>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="EATRIcon" translatesAutoresizingMaskIntoConstraints="NO" id="6aj-Tf-Vvi">
+                                <rect key="frame" x="101.5" y="662.5" width="211" height="195"/>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBlueColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="W44-Cc-lDo" firstAttribute="height" secondItem="ubJ-VM-TEE" secondAttribute="height" multiplier="0.6" id="8BF-TG-w9n"/>
+                            <constraint firstItem="W44-Cc-lDo" firstAttribute="height" secondItem="ubJ-VM-TEE" secondAttribute="height" multiplier="0.4" id="8BF-TG-w9n"/>
                             <constraint firstItem="nMc-1R-hFL" firstAttribute="width" secondItem="ubJ-VM-TEE" secondAttribute="width" multiplier="0.9" id="9LL-iV-HpJ"/>
+                            <constraint firstItem="6aj-Tf-Vvi" firstAttribute="centerX" secondItem="b7E-fm-gG1" secondAttribute="centerX" id="JEc-Rg-SNT"/>
+                            <constraint firstItem="6aj-Tf-Vvi" firstAttribute="height" secondItem="ubJ-VM-TEE" secondAttribute="height" multiplier="0.217634" id="Jq5-Cg-BC4"/>
                             <constraint firstItem="W44-Cc-lDo" firstAttribute="width" secondItem="ubJ-VM-TEE" secondAttribute="width" multiplier="0.9" id="MOm-HH-xHw"/>
+                            <constraint firstItem="6aj-Tf-Vvi" firstAttribute="width" secondItem="ubJ-VM-TEE" secondAttribute="width" multiplier="0.509662" id="MfG-vc-jEV"/>
                             <constraint firstItem="W44-Cc-lDo" firstAttribute="centerX" secondItem="b7E-fm-gG1" secondAttribute="centerX" id="Qht-2d-bXn"/>
                             <constraint firstItem="nMc-1R-hFL" firstAttribute="height" secondItem="ubJ-VM-TEE" secondAttribute="height" multiplier="0.253348" id="ULK-fa-y9j"/>
-                            <constraint firstItem="W44-Cc-lDo" firstAttribute="centerY" secondItem="b7E-fm-gG1" secondAttribute="centerY" multiplier="1.2" id="Y1R-QB-4k7"/>
+                            <constraint firstItem="W44-Cc-lDo" firstAttribute="centerY" secondItem="b7E-fm-gG1" secondAttribute="centerY" id="Y1R-QB-4k7"/>
+                            <constraint firstItem="6aj-Tf-Vvi" firstAttribute="centerY" secondItem="b7E-fm-gG1" secondAttribute="centerY" multiplier="1.6" id="dov-de-14w"/>
                             <constraint firstItem="nMc-1R-hFL" firstAttribute="centerX" secondItem="b7E-fm-gG1" secondAttribute="centerX" id="xYc-H7-BjY"/>
                             <constraint firstItem="nMc-1R-hFL" firstAttribute="centerY" secondItem="b7E-fm-gG1" secondAttribute="centerY" multiplier="0.4" id="yNa-r0-HUe"/>
                         </constraints>
@@ -102,6 +106,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="qBX-MW-WVw"/>
                     <connections>
+                        <outlet property="appIconImageView" destination="6aj-Tf-Vvi" id="J2d-fZ-xqJ"/>
                         <outlet property="emailAddressTextField" destination="jlP-gh-wj4" id="kSL-Hp-bYn"/>
                         <outlet property="passwordTextField" destination="Ofd-2C-Gjp" id="Osu-mW-MyQ"/>
                     </connections>
@@ -109,7 +114,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7Jj-vR-L4c" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
                 <exit id="bkT-TX-fyc" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="96" y="-186"/>
+            <point key="canvasLocation" x="95.652173913043484" y="-186.16071428571428"/>
         </scene>
         <!--AccountVC-->
         <scene sceneID="TfQ-ah-tQS">
@@ -550,7 +555,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="location" width="337" height="336"/>
+        <image name="EATRIcon" width="1024" height="1024"/>
         <image name="star" catalog="system" width="128" height="116"/>
         <image name="star.fill" catalog="system" width="128" height="116"/>
     </resources>

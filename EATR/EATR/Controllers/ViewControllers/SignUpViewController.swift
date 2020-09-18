@@ -13,6 +13,7 @@ class SignUpViewController: UIViewController {
     // MARK: - Outlets
     @IBOutlet weak var emailAddressTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
+    @IBOutlet weak var appIconImageView: UIImageView!
     
     // MARK: - Lifecycle
     override func viewDidLoad() {
@@ -21,6 +22,7 @@ class SignUpViewController: UIViewController {
         emailAddressTextField.delegate = self
         passwordTextField.delegate = self
         
+        appIconImageView.layer.cornerRadius = 10
         self.navigationController?.navigationBar.isHidden = true
     }
     
@@ -95,12 +97,10 @@ class SignUpViewController: UIViewController {
                 self.presentFailureAlertController(title: "Sign Up Failed", message: "Please make sure your password is at least 8 characters, contains a special character, and a number.")
             }
             
-            let firstName = firstNameTextField.text!.trimmingCharacters(in: .whitespacesAndNewlines)
-            let lastName = lastNameTextField.text!.trimmingCharacters(in: .whitespacesAndNewlines)
-            let email = createEmailTextField.text!.trimmingCharacters(in: .whitespacesAndNewlines)
-            let password = createPasswordTextField.text!.trimmingCharacters(in: .whitespacesAndNewlines)
+            guard let firstName = firstNameTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines),
+                let lastName = lastNameTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines), !firstName.isEmpty, !lastName.isEmpty else { return }
             
-            UserController.shared.createUserWith(firstName: firstName, lastName: lastName, email: email, password: password) { (result) in
+            UserController.shared.createUserWith(firstName: firstName, lastName: lastName, email: cleanedEmail, password: cleanedPassword) { (result) in
                 switch result {
                 case .success(let user):
                     guard let user = user else { return }

@@ -42,6 +42,7 @@ struct Category: Codable {
     let title: String
 } // End of struct
 
+// MARK: - Extensions
 extension CLLocationCoordinate2D: Codable {
     enum CodingKeys: CodingKey {
         case latitude
@@ -61,3 +62,9 @@ extension CLLocationCoordinate2D: Codable {
         try container.encode(longitude)
     }
 } // End of extension
+
+extension Business: Equatable {
+    static func == (lhs: Business, rhs: Business) -> Bool {
+        return lhs.name == rhs.name
+    }
+}
